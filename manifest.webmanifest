@@ -11,8 +11,8 @@
 		"permissions": [
 			"scenegraph"
 		],
-		"browserWidth": 1024,
-		"browserHeight": 1024,
+		"browserWidth": 480,
+		"browserHeight": 640,
 		"startAutomatically": false
 	}
 }
