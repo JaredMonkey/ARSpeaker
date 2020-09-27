@@ -4,10 +4,51 @@
   <head>
     <meta charset="UTF-8">
     <title>SpeakAR</title>
-	<link href="styles.css?1601235447910" rel="stylesheet">
+	<link href="styles.css?1601239672046" rel="stylesheet">
   </head>
 
   <body>
+
+      <script src="https://sdk.scdn.co/spotify-player.js"></script>
+      <script>
+        window.onSpotifyWebPlaybackSDKReady = () => {
+          const token = 'BQDlt__JqWzM1RW76_BSuhUS9yukmN5JZw9H3M7_93hMxVYAq_E4wpNqSM2v0gvzZkc3xpZj39RA3DIC4BB2XweDod1d13dhhwQXsiXiWFXXdB0r0nFaFgQoRO4zsO5ELFanwRrZt7ieqS2bRQ5kSco1hjzKBODikqH55OJtnnvPPUrK61f1Mfs_DA';
+          const player = new Spotify.Player({
+            name: 'Aardvark Audio Player',
+            getOAuthToken: cb => { cb(token); }
+          });
+    
+          // Error handling
+          player.addListener('initialization_error', ({ message }) => { console.error(message); });
+          player.addListener('authentication_error', ({ message }) => { console.error(message); });
+          player.addListener('account_error', ({ message }) => { console.error(message); });
+          player.addListener('playback_error', ({ message }) => { console.error(message); });
+    
+          // Playback status updates
+          player.addListener('player_state_changed', state => { console.log(state); });
+    
+          // Ready
+          player.addListener('ready', ({ device_id }) => {
+            console.log('Ready with Device ID', device_id);
+          });
+    
+          // Not Ready
+          player.addListener('not_ready', ({ device_id }) => {
+            console.log('Device ID has gone offline', device_id);
+          });
+    
+          // Connect to the player!
+          player.connect();
+        };
+      </script>
+      <p id="demo">This ia a demo for Audio Playback from Spotify for Aardvark. Please leave this window open while you're listening to music.</p>
+
+      <script>
+      function myFunction() {
+        var x = "User-agent header sent: " + navigator.userAgent;
+        document.getElementById("demo").innerHTML = x;
+      }
+      </script>
     <div id="root" class="FullPage"></div>
-  <script type="text/javascript" src="main.js?0b4d0f6fd92bc2ebd8dc"></script></body>
+  <script type="text/javascript" src="main.js?ea1bd28e9d6e6e9e749d"></script></body>
 </html>
